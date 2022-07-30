@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/goala/static/css/main.12e289ec.css",
-    "main.js": "/goala/static/js/main.e7ce012a.js",
+    "main.js": "/goala/static/js/main.a75c6c58.js",
     "static/js/787.478ba0b3.chunk.js": "/goala/static/js/787.478ba0b3.chunk.js",
     "index.html": "/goala/index.html",
     "main.12e289ec.css.map": "/goala/static/css/main.12e289ec.css.map",
-    "main.e7ce012a.js.map": "/goala/static/js/main.e7ce012a.js.map",
+    "main.a75c6c58.js.map": "/goala/static/js/main.a75c6c58.js.map",
     "787.478ba0b3.chunk.js.map": "/goala/static/js/787.478ba0b3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.12e289ec.css",
-    "static/js/main.e7ce012a.js"
+    "static/js/main.a75c6c58.js"
   ]
 }
