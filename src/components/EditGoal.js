@@ -6,14 +6,11 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { DialogContent } from "@mui/material";
 import DialogContentText from "@mui/material/DialogContentText";
 
-export const DeleteGoal = ({
+export const EditGoal = ({
   open,
   handleClose,
-  onDelete,
-  confirmedDelete,
-  id,
-  name,
-  DeleteAll,
+  
+  
 }) => {
 
   return (

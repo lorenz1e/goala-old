@@ -2,7 +2,7 @@ import React from "react";
 import Fab from "@mui/material/Fab";
 import AddIcon from '@mui/icons-material/Add';
 
-export default function AddFAB({ isOpen, setIsOpen }) {
+export default function AddFAB({ open, setOpen }) {
 
   const fabStyle = {
     position: "fixed",
@@ -11,7 +11,7 @@ export default function AddFAB({ isOpen, setIsOpen }) {
   };
 
   return (
-    <Fab color="primary" onClick={() => setIsOpen(true)} style={fabStyle}>
+    <Fab color="primary" onClick={() => setOpen(true)} style={fabStyle}>
       <AddIcon></AddIcon>
     </Fab>
   );

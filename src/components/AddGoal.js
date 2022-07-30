@@ -7,17 +7,12 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import { useRef, useEffect } from "react";
+import { useRef} from "react";
 import { v4 as uuidv4 } from "uuid";
 
 export default function AddGoal({ open, handleClose, setGoals, goals, }) {
   const inputName = useRef();
   const inputAmount = useRef();
-
-  
-
-  if (!open) return null;
-
 
   const handleAddGoal = () => {
     

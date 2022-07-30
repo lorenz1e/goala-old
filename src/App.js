@@ -4,30 +4,64 @@ import AddGoal from "./components/AddGoal";
 import AddFAB from "./components/AddFAB";
 import { useEffect } from "react";
 import { DeleteGoal } from "./components/DeleteGoal";
+import { EditGoal } from "./components/EditGoal";
+import Edit from "@mui/icons-material/Edit";
 
 const LOCAL_STORAGE_KEY = "GOALA.goals";
 
-//setGoals(goals.filter((goal) => goal.id !== id))
-
-//if (storedGoals > null) localStorage.setItem(storedGoals)
 function App() {
+  //  USESTATE STRINGS
+
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
-
+  const [openEditModal, setOpenEditModal] = useState(false);
   const [goals, setGoals] = useState(
     JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || []
   );
+
+  //  LOCAL STORAGE
 
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(goals));
   }, [goals]);
 
-  const openModalDelete = (id) => {
-    console.log(id);
+  //  DELETE A GOAL
+
+  const idDelete = useRef();
+  const idDeleteName = useRef();
+
+  const onDelete = (id, name) => {
+    setOpenDeleteModal(true);
+    idDelete.current = id;
+    idDeleteName.current = name;
   };
+
+  const confirmedDelete = () => {
+    setGoals(goals.filter((goal) => goal.id !== idDelete.current));
+    setOpenDeleteModal(false);
+    console.log("removed goal:", idDelete.current);
+  };
+
+  const DeleteAll = () => {
+    setOpenDeleteModal(false);
+    setGoals([]);
+    console.log("removed goal:", "*");
+  };
+
+  //  EDIT A GOAL
+
+  const onEdit = (name, amount, amountDone) => {
+    setOpenEditModal(true);
+  };
+
+  // UI
   return (
     <main>
-      <AddFAB isOpen={openAddModal} setIsOpen={setOpenAddModal}></AddFAB>
+      <AddFAB
+        isOpen={openAddModal}
+        setIsOpen={setOpenAddModal}
+        setOpen={setOpenAddModal}
+      ></AddFAB>
 
       <AddGoal
         open={openAddModal}
@@ -35,12 +69,21 @@ function App() {
         setGoals={setGoals}
         goals={goals}
       ></AddGoal>
-
-      <GoalList goals={goals} onDelete={openModalDelete}></GoalList>
+      <GoalList goals={goals} onDelete={onDelete}></GoalList>
       <DeleteGoal
         open={openDeleteModal}
         handleClose={() => setOpenDeleteModal(false)}
+        confirmedDelete={confirmedDelete}
+        id={idDelete.current}
+        name={idDeleteName.current}
+        DeleteAll={DeleteAll}
       ></DeleteGoal>
+      <EditGoal
+      open={openEditModal}
+      handleClose={()=> setOpenEditModal(false)}
+      id={idEdit.current}
+      name={idEditName.current}
+      ></EditGoal>
     </main>
   );
 }
