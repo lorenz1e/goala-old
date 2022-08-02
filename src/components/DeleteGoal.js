@@ -17,7 +17,7 @@ export const DeleteGoal = ({
 }) => {
 
   return (
-    <Dialog open={open} onClose>
+    <Dialog open={open} onClose={handleClose}>
       <DialogTitle id="alert-dialog-title">Delete Goal: {name}</DialogTitle>
 
       <DialogContent>

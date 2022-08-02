@@ -7,29 +7,31 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import { useRef} from "react";
+import { createRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-export default function AddGoal({ open, handleClose, setGoals, goals, }) {
-  const inputName = useRef();
-  const inputAmount = useRef();
+
+export default function AddGoal({ open, handleClose, setGoals, goals }) {
+  const inputName = createRef();
+  const inputAmount = createRef();
 
   const handleAddGoal = () => {
-    
     const name = inputName.current.value;
     const amount = inputAmount.current.value;
 
     setGoals((prevGoals) => {
       return [
         ...prevGoals,
-        { id: uuidv4(), name: name, amount: amount, amountDone: "0"}
+        { id: uuidv4(), name: name, amount: amount, amountDone: "0" },
       ];
     });
+
+    handleClose()
   };
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Create a new Goal</DialogTitle>
+      <DialogTitle>Add a new Goal</DialogTitle>
       <DialogContent>
         <IconButton
           aria-label="close"
@@ -43,8 +45,26 @@ export default function AddGoal({ open, handleClose, setGoals, goals, }) {
         >
           <CloseIcon />
         </IconButton>
-        <input placeholder="Goal Name" type="text" ref={inputName}></input>
-        <input placeholder="Amount" type="number" ref={inputAmount}></input>
+        <TextField
+          autoFocus
+          margin="dense"
+          id="name"
+          label="Goal Name"
+          type="text"
+          fullWidth
+          variant="standard"
+          inputRef={inputName}
+        />
+        <TextField
+          autoFocus
+          margin="dense"
+          id="name"
+          label="Amount"
+          type="number"
+          fullWidth
+          variant="standard"
+          inputRef={inputAmount}
+        />
       </DialogContent>
       <DialogActions>
         <Button onClick={handleAddGoal}>Save</Button>

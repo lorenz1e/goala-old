@@ -50,8 +50,24 @@ function App() {
 
   //  EDIT A GOAL
 
-  const onEdit = (name, amount, amountDone) => {
+  const currentId = useRef();
+  const currentName = useRef();
+  const currentAmount = useRef();
+  const currentAmountDone = useRef();
+
+  const onEdit = (goal) => {
     setOpenEditModal(true);
+
+    currentId.current = goal.id;
+    currentName.current = goal.name;
+    currentAmount.current = goal.amount;
+    currentAmountDone.current = goal.amountDone;
+
+  };
+
+  const confirmedEdit = () => {
+    const currentIndex = setGoals(goals.map((goals) => goals.id == {currentId}))
+    
   };
 
   // UI
@@ -69,7 +85,7 @@ function App() {
         setGoals={setGoals}
         goals={goals}
       ></AddGoal>
-      <GoalList goals={goals} onDelete={onDelete}></GoalList>
+      <GoalList goals={goals} onDelete={onDelete} onEdit={onEdit}></GoalList>
       <DeleteGoal
         open={openDeleteModal}
         handleClose={() => setOpenDeleteModal(false)}
@@ -79,10 +95,13 @@ function App() {
         DeleteAll={DeleteAll}
       ></DeleteGoal>
       <EditGoal
-      open={openEditModal}
-      handleClose={()=> setOpenEditModal(false)}
-      id={idEdit.current}
-      name={idEditName.current}
+        open={openEditModal}
+        handleClose={() => setOpenEditModal(false)}
+        id={currentId.current}
+        name={currentName.current}
+        amount={currentAmount.current}
+        amountDone={currentAmountDone.current}
+        confirmedEdit={confirmedEdit}
       ></EditGoal>
     </main>
   );
