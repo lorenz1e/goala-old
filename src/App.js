@@ -60,12 +60,12 @@ function App() {
     currentName.current = goal.name;
     currentAmount.current = goal.amount;
     currentAmountDone.current = goal.amountDone;
-
+    confirmedEdit()
   };
 
   const confirmedEdit = () => {
-    const currentIndex = setGoals(goals.map((goals) => goals.id == {currentId}))
-    
+    var x = goals.indexOf(currentId)
+    console.log(x)
   };
 
   // UI

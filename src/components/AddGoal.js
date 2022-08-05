@@ -19,9 +19,12 @@ export default function AddGoal({ open, handleClose, setGoals, goals, LOCAL_STOR
     const amount = inputAmount.current.value;
 
     
-    if (!name) return;
+    if (!name) {
+      alert("FILL IN THE FORM");
+      return;
+    }
     if (!amount) {
-      alert("hello");
+      alert("FILL IN THE FORM:");
       return;
     }
 
