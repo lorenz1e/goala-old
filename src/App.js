@@ -5,8 +5,6 @@ import AddFAB from "./components/AddFAB";
 import { useEffect } from "react";
 import { DeleteGoal } from "./components/DeleteGoal";
 import { EditGoal } from "./components/EditGoal";
-import Edit from "@mui/icons-material/Edit";
-
 const LOCAL_STORAGE_KEY = "GOALA.goals";
 
 function App() {

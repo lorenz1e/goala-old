@@ -6,7 +6,6 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { DialogContent } from "@mui/material";
 import DialogContentText from "@mui/material/DialogContentText";
 import TextField from "@mui/material/TextField";
-import { Space } from "antd";
 
 export const EditGoal = ({
   open,

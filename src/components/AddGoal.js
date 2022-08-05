@@ -10,8 +10,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { createRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-
-export default function AddGoal({ open, handleClose, setGoals, goals }) {
+export default function AddGoal({ open, handleClose, setGoals, goals, LOCAL_STORAGE_KEY }) {
   const inputName = createRef();
   const inputAmount = createRef();
 
@@ -19,14 +18,21 @@ export default function AddGoal({ open, handleClose, setGoals, goals }) {
     const name = inputName.current.value;
     const amount = inputAmount.current.value;
 
+    
+    if (!name) return;
+    if (!amount) {
+      alert("hello");
+      return;
+    }
+
     setGoals((prevGoals) => {
       return [
         ...prevGoals,
         { id: uuidv4(), name: name, amount: amount, amountDone: "0" },
       ];
     });
-
-    handleClose()
+    
+    handleClose();
   };
 
   return (
