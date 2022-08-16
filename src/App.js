@@ -5,6 +5,9 @@ import AddFAB from "./components/AddFAB";
 import { useEffect } from "react";
 import { DeleteGoal } from "./components/DeleteGoal";
 import { EditGoal } from "./components/EditGoal";
+import AddGoalButton from "./components/AddGoalButton";
+import LoginFAB from "./components/LoginFAB";
+
 const LOCAL_STORAGE_KEY = "GOALA.goals";
 
 function App() {
@@ -13,9 +16,13 @@ function App() {
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
+  const [openLoginModal, setOpenLoginModal] = useState(false);
+
   const [goals, setGoals] = useState(
     JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || []
   );
+
+  // CHECK IF GOALS THERE
 
   //  LOCAL STORAGE
 
@@ -60,22 +67,20 @@ function App() {
     currentName.current = goal.name;
     currentAmount.current = goal.amount;
     currentAmountDone.current = goal.amountDone;
-    confirmedEdit()
+    confirmedEdit();
   };
 
   const confirmedEdit = () => {
-    var x = goals.indexOf(currentId)
-    console.log(x)
+    var x = goals.indexOf(currentId);
+    console.log(x);
   };
 
   // UI
   return (
     <main>
-      <AddFAB
-        isOpen={openAddModal}
-        setIsOpen={setOpenAddModal}
-        setOpen={setOpenAddModal}
-      ></AddFAB>
+      <AddFAB setOpen={setOpenAddModal}></AddFAB>
+
+      <LoginFAB setOpen={setOpenLoginModal}></LoginFAB>
 
       <AddGoal
         open={openAddModal}
@@ -83,7 +88,11 @@ function App() {
         setGoals={setGoals}
         goals={goals}
       ></AddGoal>
-      <GoalList goals={goals} onDelete={onDelete} onEdit={onEdit}></GoalList>
+      {goals.length > 0 ? (
+        <GoalList goals={goals} onDelete={onDelete} onEdit={onEdit}></GoalList>
+      ) : (
+        <AddGoalButton setOpen={setOpenAddModal}></AddGoalButton>
+      )}
       <DeleteGoal
         open={openDeleteModal}
         handleClose={() => setOpenDeleteModal(false)}
@@ -92,6 +101,16 @@ function App() {
         name={idDeleteName.current}
         DeleteAll={DeleteAll}
       ></DeleteGoal>
+
+      <DeleteGoal
+        open={openLoginModal}
+        handleClose={() => setOpenLoginModal(false)}
+        confirmedDelete={confirmedDelete}
+        id={idDelete.current}
+        name={idDeleteName.current}
+        DeleteAll={DeleteAll}
+      ></DeleteGoal>
+
       <EditGoal
         open={openEditModal}
         handleClose={() => setOpenEditModal(false)}
